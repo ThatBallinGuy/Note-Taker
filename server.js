@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-//const noteData = require('../db/db.json');
+const noteData = require('./db/db.json');
 
 const PORT = process.env.PORT || 3001;
 
@@ -13,14 +13,16 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+  console.log("get works");
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, '/notes.html'));
+  console.log("notes works");
+  res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
-//app.get('/api/notes', (req, res) => res.json(noteData));
+app.get('/api/notes', (req, res) => res.json(noteData));
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
